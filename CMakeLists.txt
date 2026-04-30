@@ -3,66 +3,37 @@ project(FinalProject)
 set(CMAKE_CXX_STANDARD 20)
 include(FetchContent)
 
-# ─── Force static libs so nothing needs manual installation ───────────────────
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
-
-# ─── Assimp ───────────────────────────────────────────────────────────────────
-FetchContent_Declare(
-        assimp
+FetchContent_Declare(assimp
         GIT_REPOSITORY https://github.com/assimp/assimp.git
-        GIT_TAG        v5.3.1
-)
-set(ASSIMP_BUILD_TESTS         OFF CACHE BOOL "" FORCE)
-set(ASSIMP_INSTALL             OFF CACHE BOOL "" FORCE)
-set(ASSIMP_WARNINGS_AS_ERRORS  OFF CACHE BOOL "" FORCE)
-set(ASSIMP_BUILD_ZLIB          ON  CACHE BOOL "" FORCE)  # bundle zlib too
-FetchContent_MakeAvailable(assimp)
+        GIT_TAG v5.3.1)
+set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(ASSIMP_INSTALL OFF CACHE BOOL "" FORCE)
 
-# ─── OpenAL Soft ──────────────────────────────────────────────────────────────
-FetchContent_Declare(
-        OpenAL
+FetchContent_Declare(OpenAL
         GIT_REPOSITORY https://github.com/kcat/openal-soft.git
-        GIT_TAG        1.24.2          # pin a release, not master
+        GIT_TAG 1.25.0
+        GIT_SHALLOW ON
 )
-set(ALSOFT_UTILS    OFF CACHE BOOL "" FORCE)
-set(ALSOFT_EXAMPLES OFF CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(OpenAL)
+set(ALSOFT_BUILD_ROUTER OFF CACHE BOOL "" FORCE)
+set(AL_USE_MODULES OFF CACHE BOOL "" FORCE)
 
-# ─── GLFW ─────────────────────────────────────────────────────────────────────
-FetchContent_Declare(
-        glfw
+FetchContent_Declare(glfw
         GIT_REPOSITORY https://github.com/glfw/glfw.git
-        GIT_TAG        3.4
-        GIT_SHALLOW    ON
-)
-set(GLFW_BUILD_DOCS  OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(GLFW_INSTALL     OFF CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(glfw)
+        GIT_TAG 3.4
+        GIT_SHALLOW ON)
+set(GLFW_BUILD_DOCS OFF CACHE INTERNAL "")
+set(GLFW_BUILD_TESTS OFF CACHE INTERNAL "")
+set(GLFW_INSTALL OFF CACHE INTERNAL "")
 
-# ─── FreeType ─────────────────────────────────────────────────────────────────
-FetchContent_Declare(
-        FreeType
+FetchContent_Declare(FreeType
         GIT_REPOSITORY https://github.com/freetype/freetype.git
-        GIT_TAG        VER-2-13-3      # pin a release, not master
-)
-FetchContent_MakeAvailable(FreeType)
+        GIT_TAG master)
 
-# ─── GLM ──────────────────────────────────────────────────────────────────────
-FetchContent_Declare(
-        glm
-        GIT_REPOSITORY https://github.com/g-truc/glm.git
-        GIT_TAG        1.0.1
-)
-FetchContent_MakeAvailable(glm)
-
-# ─── nlohmann/json ────────────────────────────────────────────────────────────
-FetchContent_Declare(
-        json
+FetchContent_Declare(json
         GIT_REPOSITORY https://github.com/nlohmann/json.git
-        GIT_TAG        v3.11.3
-)
-FetchContent_MakeAvailable(json)
+        GIT_TAG master)
+
+FetchContent_MakeAvailable(assimp OpenAL glfw FreeType json)
 
 # ─── Include dirs ─────────────────────────────────────────────────────────────
 include_directories(
