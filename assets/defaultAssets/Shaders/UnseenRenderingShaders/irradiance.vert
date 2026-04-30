@@ -1,0 +1,21 @@
+#version 330 core
+#extension GL_NV_shadow_samplers_cube : enable
+layout (location = 0) in vec3 aPos;
+
+uniform mat4 projection;
+uniform mat4 view;
+
+#define NUM_TEXTURES 12
+uniform sampler2D textures[NUM_TEXTURES];
+
+out vec3 localPos;
+
+void main()
+{
+    localPos = aPos;
+
+    mat4 rotView = mat4(mat3(view)); // remove translation from the view matrix
+    vec4 clipPos = projection * rotView * vec4(localPos, 1.0);
+
+    gl_Position = clipPos.xyww;
+}
