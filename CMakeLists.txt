@@ -33,7 +33,11 @@ FetchContent_Declare(json
         GIT_REPOSITORY https://github.com/nlohmann/json.git
         GIT_TAG master)
 
-FetchContent_MakeAvailable(assimp OpenAL glfw FreeType json)
+FetchContent_Declare(glm
+        GIT_REPOSITORY https://github.com/g-truc/glm.git
+        GIT_TAG master)
+
+FetchContent_MakeAvailable(assimp OpenAL glfw FreeType json glm)
 
 # ─── Include dirs ─────────────────────────────────────────────────────────────
 include_directories(
@@ -78,4 +82,5 @@ target_link_libraries(FinalProject PRIVATE
         freetype
         glfw
         OpenAL::OpenAL
+        glm
 )
