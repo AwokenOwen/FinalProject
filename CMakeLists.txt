@@ -3,6 +3,8 @@ project(FinalProject)
 set(CMAKE_CXX_STANDARD 20)
 include(FetchContent)
 
+add_compile_options(-Wno-unused-but-set-variable)
+
 FetchContent_Declare(assimp
         GIT_REPOSITORY https://github.com/assimp/assimp.git
         GIT_TAG v5.3.1)
@@ -11,8 +13,7 @@ set(ASSIMP_INSTALL OFF CACHE BOOL "" FORCE)
 
 FetchContent_Declare(OpenAL
         GIT_REPOSITORY https://github.com/kcat/openal-soft.git
-        GIT_TAG 1.25.0
-        GIT_SHALLOW ON
+        GIT_TAG master
 )
 set(ALSOFT_BUILD_ROUTER OFF CACHE BOOL "" FORCE)
 set(AL_USE_MODULES OFF CACHE BOOL "" FORCE)

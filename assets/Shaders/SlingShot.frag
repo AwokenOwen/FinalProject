@@ -93,7 +93,7 @@ vec3 CreateMaterial(vec3 _albedo, vec3 _normal, float _metallic, float _roughnes
     vec3 kD = 1.0 - kS;
     kD *= 1.0 - metallic;
 
-    vec3 irradiance = textureCube(irradianceMap, N).rgb;
+    vec3 irradiance = texture(irradianceMap, N).rgb;
     vec3 diffuse    = irradiance * albedo;
 
     const float MAX_REFLECTION_LOD = 4.0;

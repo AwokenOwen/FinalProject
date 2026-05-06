@@ -11,5 +11,5 @@ uniform sampler2D textures[NUM_TEXTURES];
 
 void main()
 {
-	FragColor = textureCube(skybox, normalize(TexCoords));
+	FragColor = texture(skybox, normalize(TexCoords));
 }
